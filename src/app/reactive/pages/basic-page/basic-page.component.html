@@ -16,9 +16,10 @@
                            formControlName="name"
                            placeholder="Nombre del producto">
 
-                    <span class="form-text text-danger">
+                    <span *ngIf="isValidField ('name')"
+                          class="form-text text-danger">
                         <!-- Debe de ser de 3 letras -->
-                        error message
+                        {{ getFieldError('name') }}
                     </span>
                 </div>
             </div>
@@ -31,8 +32,8 @@
                            class="form-control"
                            formControlName="price"
                            placeholder="Precio del producto">
-                    <span class="form-text text-danger">
-                        El precio debe de ser 0 o mayor
+                    <span *ngIf="isValidField('price')" class="form-text text-danger">
+                        El precio debe de ser 0 o mayor.
                     </span>
                 </div>
             </div>
@@ -46,7 +47,7 @@
                            formControlName="inStorage"
                            placeholder="Existencias del producto">
 
-                    <span class="form-text text-danger">
+                    <span *ngIf="isValidField('inStorage')" class="form-text text-danger">
                          Las existencias deben de ser 0 o mayor
                     </span>
                 </div>
@@ -78,7 +79,7 @@
         <span>Valid</span>
         <pre>{{ myForm.valid | json }}</pre>
 
-        <span>Pristine</span>
+        <span>Pristine</span> <!-- Esto es para saber si el usuario ha tocado o manipulado el formulario desde que se cargó la página -->
         <pre>{{ myForm.pristine | json }}</pre>
 
         <span>Touched</span>
