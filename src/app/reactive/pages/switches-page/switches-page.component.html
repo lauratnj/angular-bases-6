@@ -2,7 +2,7 @@
 <hr>
 
 
-<form autocomplete="off">
+<form [formGroup]="myForm" (ngSubmit)="onSave()" autocomplete="off">
 
     <!-- Radio -->
     <div class="row mb-3">
@@ -12,6 +12,7 @@
             <div class="form-check">
                 <input class="form-check-input"
                        type="radio"
+                       formControlName="gender"
                        value="M"
                        id="radioMasculino">
                 <label class="form-check-label" for="radioMasculino">
@@ -22,6 +23,7 @@
             <div class="form-check">
                 <input class="form-check-input"
                        type="radio"
+                       formControlName="gender"
                        value="F"
                        id="radioFemenino">
                 <label class="form-check-label" for="radioFemenino">
@@ -40,6 +42,7 @@
             <div class="form-check form-switch mt-2">
                 <input class="form-check-input"
                        type="checkbox"
+                       formControlName="wantNotifications"
                        id="flexSwitchCheckChecked">
                 <label class="form-check-label" for="flexSwitchCheckChecked">Quiero recibir notificaciones</label>
             </div>
@@ -54,12 +57,13 @@
             <div class="form-check">
                 <input class="form-check-input"
                        type="checkbox"
+                       formControlName="termAndConditions"
                        id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
                   Términos y condiciones de uso
                 </label>
               </div>
-              <span class="form-text text-danger">
+              <span *ngIf="isValidField('termAndConditions')" class="form-text text-danger">
                  Debe de aceptar las condiciones de uso
               </span>
 
@@ -70,7 +74,8 @@
     <!-- Boton submit -->
     <div class="row">
         <div class="col">
-            <button class="btn btn-primary float-end"
+            <button
+                    class="btn btn-primary float-end"
                     type="submit">
                 Guardar
             </button>
@@ -81,15 +86,15 @@
 
 
 <h5>Valor del formulario</h5>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ myForm.value | json }}</pre>
 <br>
 
 <h5>Persona</h5>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ person | json }}</pre>
 <br>
 
 <h5>Valid</h5>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ myForm.valid | json }}</pre>
 
 <!-- <h5>Términos</h5> -->
 <!-- <pre>{{ myForm.controls?.terminos?.errors | json }}</pre> -->
